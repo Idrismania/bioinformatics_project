@@ -29,7 +29,7 @@ for epoch in range(num_epochs):
     tqdm_dataloader = tqdm(train_dataloader, desc=f'Epoch {epoch + 1}/{num_epochs}', leave=False)
     # tqdm for the dataloader
     for images, labels in tqdm_dataloader:
-        
+
         # Move data to the device (GPU or CPU)
         images, labels = images.to(device), labels.to(device)
 

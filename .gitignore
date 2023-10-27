@@ -1,4 +1,6 @@
-# Ignore PNG and JPEG files
+# Ignore PNG and JPEG files, as well as cache
+__pycache__/
+*.pyc
 *.png
 *.jpeg
 *.jpg
