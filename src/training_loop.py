@@ -27,6 +27,7 @@ for epoch in range(num_epochs):
     running_loss = 0.0
 
     tqdm_dataloader = tqdm(train_dataloader, desc=f'Epoch {epoch + 1}/{num_epochs}', leave=False)
+
     # tqdm for the dataloader
     for images, labels in tqdm_dataloader:
 
