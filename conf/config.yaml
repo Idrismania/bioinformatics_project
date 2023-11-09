@@ -1,0 +1,7 @@
+paths:
+  data: ${hydra:runtime.cwd}/../data
+
+params:
+  epoch_count: 10
+  learning_rate: 0.001
+  batch_size: 4
