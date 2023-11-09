@@ -78,4 +78,8 @@ class UNet(nn.Module):
         x = self.up_conv2(x, skip2_out)
         x = self.up_conv1(x, skip1_out)
         x = nn.functional.sigmoid(self.conv_last(x))
+
+        # Note: binary thresholding should be done during inference,
+        # not during training.
+
         return x
