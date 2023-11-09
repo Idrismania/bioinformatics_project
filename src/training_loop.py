@@ -15,6 +15,7 @@ cs.store('UnetConfig', node=UnetConfig)
 
 @hydra.main(config_path='../conf', config_name='config', version_base='1.3')
 def main(cfg: UnetConfig):
+
     # Hyperparameters
     learning_rate = cfg.params.learning_rate
     num_epochs = cfg.params.epoch_count
@@ -32,6 +33,7 @@ def main(cfg: UnetConfig):
 
     # Training loop with tqdm
     for epoch in range(num_epochs):
+
         model.train()  # Set the model to training mode
 
         running_loss = 0.0
@@ -46,6 +48,9 @@ def main(cfg: UnetConfig):
 
             # Forward pass
             outputs = model(images)
+
+            # Save output in case you want to inspect
+            torch.save(outputs, '../output_model/outputs.pt')
 
             # Compute the loss
             loss = criterion(outputs, labels)
