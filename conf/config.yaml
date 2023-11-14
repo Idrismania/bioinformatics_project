@@ -1,5 +1,7 @@
 paths:
   data: ${hydra:runtime.cwd}/../data
+  openslide: C:/Users/idris/AppData/Local/Microsoft/WindowsApps/openslide-win64-20231011/bin
+  vips: C:/Users/idris/AppData/Local/Microsoft/WindowsApps/vips-dev-8.15/bin
 
 params:
   epoch_count: 10

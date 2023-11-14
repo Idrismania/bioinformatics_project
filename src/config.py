@@ -3,6 +3,8 @@ from dataclasses import dataclass
 @dataclass
 class Paths:
     data: str
+    openslide: str
+    vips: str
 
 @dataclass
 class Params:
