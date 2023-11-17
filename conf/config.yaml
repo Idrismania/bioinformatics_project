@@ -7,3 +7,8 @@ params:
   epoch_count: 10
   learning_rate: 0.001
   batch_size: 4
+
+tiling_params:
+  tile_size_x: 256
+  tile_size_y: 256
+  microns_per_pixel: 0.4990

@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-
+from typing import Union
 @dataclass
 class Paths:
     data: str
@@ -13,6 +13,13 @@ class Params:
     batch_size: int
 
 @dataclass
+class Tiling_Params:
+    tile_size_x: int
+    tile_size_y: int
+    microns_per_pixel: Union[float, int]
+
+@dataclass
 class UnetConfig:
     paths: Paths
     params: Params
+    tiling_params: Tiling_Params
