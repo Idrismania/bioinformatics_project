@@ -4,6 +4,8 @@ As of 27-10-2023, this is placeholder code for my future generated mask data. Fo
 To replicate project, download the dataset and create a data folder in the root directory. Move train/ test/ and val/ folders to your created data folder.
 
 <p align="center">
-  <br><br>
-  <img src="images/u-net-architecture.png" alt="UNET model" width="50%">
+  <img src="images/u-net-architecture.png" alt="UNET model" width="35%">
+  <br>
 </p>
+
+In order to configure dlup, Add Windows binary files to your windows PATH folder and import them through os.add_dll_directory("FILE_PATH"). File paths are configured through Hydra-Core in config.yaml and config.py
