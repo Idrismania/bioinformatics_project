@@ -35,7 +35,12 @@ TARGET_MPP = cfg.tiling_params.microns_per_pixel
 # Generate the mask
 mask = get_mask(slide_image)
 
-dataset = TiledROIsSlideImageDataset.from_standard_tiling(INPUT_FILE_PATH, TARGET_MPP, TILE_SIZE, (0, 0), mask=mask)
+# Input, MPP, Tile_Size, Tile_Overlap
+"""Idea from Bart to make dataset of all images: data = [dataset1, dataset2, dataset3] etc.
+Also, MPP is not unique per image. It is the MPP you want to scale all your images to for consistency.
+0.5 seems standard."""
+dataset = TiledROIsSlideImageDataset.from_standard_tiling(INPUT_FILE_PATH, 1, TILE_SIZE, (0, 0), mask=mask)
+
 
 for i, d in enumerate(dataset):
     plt.imshow(d['image'])

@@ -69,8 +69,9 @@ def main(cfg: UnetConfig):
 
             # Update tqdm progress bar with the current loss
             tqdm_dataloader.set_postfix(loss=loss.item())
+
     # Save the trained model
-    torch.save(model.state_dict(), f'../output_model/UNet_basic_{num_epochs}_epochs.pth')
+    torch.save(model.state_dict(), f'../output_model/UNet_basic_{num_epochs}_epochs_{learning_rate}_lr.pth')
 
 if __name__ == "__main__":
     main()
