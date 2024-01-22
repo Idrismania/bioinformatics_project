@@ -7,7 +7,7 @@ from config import UnetConfig
 from tqdm import tqdm
 
 # Own scripts
-from model_architecture import UNet
+from model_architecture import R2AttU_Net
 from load_data import train_dataloader
 
 cs = ConfigStore.instance()
@@ -21,7 +21,7 @@ def main(cfg: UnetConfig):
     num_epochs = cfg.params.epoch_count
 
     # Instantiate the SimpleCNN model
-    model = UNet(1)
+    model = R2AttU_Net(output_ch=1)
 
     # Define loss function and optimizer
     criterion = nn.BCELoss()
