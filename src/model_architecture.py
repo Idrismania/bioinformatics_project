@@ -289,4 +289,8 @@ class R2AttU_Net(nn.Module):
 
         d1 = self.Conv_1x1(d2)
 
+        d1 = torch.sigmoid(d1)
+
+        d1 = d1[:, 0, :, :]
+
         return d1

@@ -7,6 +7,7 @@ params:
   epoch_count: 10
   learning_rate: 0.001
   batch_size: 4
+  channel: 0
 
 tiling_params:
   tile_size_x: 256

@@ -11,6 +11,7 @@ class Params:
     epoch_count: int
     learning_rate: float
     batch_size: int
+    channel: int
 
 @dataclass
 class Tiling_Params:

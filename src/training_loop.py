@@ -1,7 +1,9 @@
+import os
 import torch
 import torch.nn as nn
 import torch.optim as optim
 import hydra
+from pathlib import Path
 from hydra.core.config_store import ConfigStore
 from config import UnetConfig
 from tqdm import tqdm
@@ -43,6 +45,25 @@ def main(cfg: UnetConfig):
         # tqdm for the dataloader
         for images, labels in tqdm_dataloader:
 
+            import matplotlib.pyplot as plt
+
+            # Assuming images and labels are tensors from the first batch
+            first_image = images[0].permute(1, 2, 0)
+            first_label = labels[0]
+            # Plot the first image and label side by side
+            fig, axes = plt.subplots(1, 2, figsize=(10, 5))
+            # Plot the first image
+            axes[0].imshow(first_image)
+            axes[0].set_title('Image')
+            
+            # Plot the first label
+            axes[1].imshow(first_label)
+            axes[1].set_title('Label')
+                
+            plt.show()
+
+            print(images, labels)
+
             # Move data to the device (GPU or CPU)
             images, labels = images.to(device), labels.to(device)
 
@@ -50,7 +71,7 @@ def main(cfg: UnetConfig):
             outputs = model(images)
 
             # Save output in case you want to inspect
-            torch.save(outputs, '../output_model/outputs.pt')
+            torch.save(outputs, Path(os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..')), "output_model", "output.pt"))
 
             # Compute the loss
             loss = criterion(outputs, labels)
