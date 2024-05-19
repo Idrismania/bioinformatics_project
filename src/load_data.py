@@ -4,7 +4,7 @@ from torch.utils.data import DataLoader
 from pathlib import Path
 from dataset import UNetDataset
 from hydra import initialize, compose
-from transformations import resize_transform
+from transformations import combined_transform
 
 with initialize(config_path="../conf", version_base='1.3'):
     cfg = compose(config_name="config.yaml")
@@ -16,7 +16,7 @@ root_dir = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
 img_dir = os.path.join(root_dir, "data", "he")
 mask_dir = os.path.join(root_dir, "data", "masks")
 
-dataset = UNetDataset(img_dir=img_dir, mask_dir=mask_dir, transform=resize_transform)
+dataset = UNetDataset(img_dir=img_dir, mask_dir=mask_dir, transform=combined_transform)
 
 train_size = int(0.8 * len(dataset))
 val_size = int(0.1 * len(dataset))

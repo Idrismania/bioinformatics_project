@@ -31,6 +31,7 @@ def main(cfg: UnetConfig):
 
     # Set the device to GPU if available, otherwise use CPU
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f"Currently training on {device}:")
     model.to(device)
 
     # Training loop with tqdm
@@ -45,24 +46,22 @@ def main(cfg: UnetConfig):
         # tqdm for the dataloader
         for images, labels in tqdm_dataloader:
 
-            import matplotlib.pyplot as plt
+            # import matplotlib.pyplot as plt
 
-            # Assuming images and labels are tensors from the first batch
-            first_image = images[0].permute(1, 2, 0)
-            first_label = labels[0]
-            # Plot the first image and label side by side
-            fig, axes = plt.subplots(1, 2, figsize=(10, 5))
-            # Plot the first image
-            axes[0].imshow(first_image)
-            axes[0].set_title('Image')
+            # # Assuming images and labels are tensors from the first batch
+            # first_image = images[0].permute(1, 2, 0)
+            # first_label = labels[0]
+            # # Plot the first image and label side by side
+            # fig, axes = plt.subplots(1, 2, figsize=(10, 5))
+            # # Plot the first image
+            # axes[0].imshow(first_image)
+            # axes[0].set_title('Image')
             
-            # Plot the first label
-            axes[1].imshow(first_label)
-            axes[1].set_title('Label')
-                
-            plt.show()
-
-            print(images, labels)
+            # # Plot the first label
+            # axes[1].imshow(first_label[0])
+            # axes[1].set_title('Label')
+            
+            # plt.show()
 
             # Move data to the device (GPU or CPU)
             images, labels = images.to(device), labels.to(device)
@@ -90,9 +89,9 @@ def main(cfg: UnetConfig):
 
             # Update tqdm progress bar with the current loss
             tqdm_dataloader.set_postfix(loss=loss.item())
-
-    # Save the trained model
-    torch.save(model.state_dict(), f'../output_model/UNet_basic_{num_epochs}_epochs_{learning_rate}_lr.pth')
+            
+            # Save the trained model
+            torch.save(model.state_dict(), Path(os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..')), "output_model", "model.pth"))
 
 if __name__ == "__main__":
     main()

@@ -6,7 +6,7 @@ paths:
 params:
   epoch_count: 10
   learning_rate: 0.001
-  batch_size: 4
+  batch_size: 16
   channel: 0
 
 tiling_params:
