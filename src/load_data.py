@@ -7,25 +7,32 @@ from hydra import initialize, compose
 from transformations import combined_transform
 
 with initialize(config_path="../conf", version_base='1.3'):
-    cfg = compose(config_name="config.yaml")
+        cfg = compose(config_name="config.yaml")
 
-batch_size = cfg.params.batch_size
+def load_dataloaders():
 
-# Set the path to your dataset
-root_dir = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
-img_dir = os.path.join(root_dir, "data", "he")
-mask_dir = os.path.join(root_dir, "data", "masks")
+    batch_size = cfg.params.batch_size
 
-dataset = UNetDataset(img_dir=img_dir, mask_dir=mask_dir, transform=combined_transform)
+    # Set the path to your dataset
+    root_dir = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
+    img_dir = os.path.join(root_dir, "data", "he")
+    mask_dir = os.path.join(root_dir, "data", "masks")
 
-train_size = int(0.8 * len(dataset))
-val_size = int(0.1 * len(dataset))
-test_size = len(dataset) - train_size - val_size
+    dataset = UNetDataset(img_dir=img_dir, mask_dir=mask_dir, transform=combined_transform)
 
-torch.manual_seed(42)
+    train_size = int(0.8 * len(dataset))
+    val_size = int(0.1 * len(dataset))
+    test_size = len(dataset) - train_size - val_size
 
-train_dataset, val_dataset, test_dataset = torch.utils.data.random_split(dataset, [train_size, val_size, test_size])
+    torch.manual_seed(44)
 
-train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=4)
-val_dataloader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=4)
-test_dataloader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=4)
+    # Create datasets
+    train_dataset, val_dataset, test_dataset = torch.utils.data.random_split(dataset, [train_size, val_size, test_size])
+
+    # Initialize dataloaders
+    train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=6, pin_memory=True)
+    val_dataloader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=4)
+    test_dataloader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=4)
+
+    return train_dataloader, val_dataloader, test_dataloader
+

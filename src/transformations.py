@@ -21,14 +21,14 @@ color_transforms = A.Compose([
 def transform(image, mask):
     # Apply geometric transforms
 
-    augmented = geometric_transforms(image=image, mask=mask)
+    # augmented = geometric_transforms(image=image, mask=mask)
 
-    image = augmented['image']
+    # image = augmented['image']
 
-    mask = augmented['mask']
+    # mask = augmented['mask']
 
     # Apply color transforms only to the image
-    image = color_transforms(image=image)['image']
+    # image = color_transforms(image=image)['image']
 
     return image, mask
 

@@ -1,11 +1,11 @@
-from model_architecture import R2AttU_Net
-from load_data import val_dataloader
+from model_architecture import UNet
+from load_data import load_dataloaders
 import torch
 import matplotlib.pyplot as plt
 import numpy as np
 
 def load_model(model_path):
-    model = R2AttU_Net()
+    model = UNet()
     model.load_state_dict(torch.load(model_path))
     model.eval()
     return model
@@ -72,13 +72,13 @@ if __name__ == "__main__":
     # Replace these with your paths and DataLoader
 
 
-    model_path = r"D:\Users\Horlings\ii_hh\bioinformatics_project\model.pth" # Without augmentation
-    #model_path = r"D:\Users\Horlings\ii_hh\bioinformatics_project\output_model\model.pth" # With augmentation
+    model_path = r"E:\Users\Horlings\ii_hh\bioinformatics_project\output_model\model.pth"
+
     
     # Define your test dataset and DataLoader
     # Example:
     # test_dataset = UNetDataset(img_dir='path/to/test/images', mask_dir='path/to/test/masks', transform=your_transform)
     # test_loader = DataLoader(test_dataset, batch_size=5, shuffle=False, num_workers=4)
-    
+    train_dataloader, val_dataloader, test_dataloader = load_dataloaders()
     # Call the main function with the model path and test loader
-    main(model_path, val_dataloader)
+    main(model_path, train_dataloader)
