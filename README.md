@@ -1,7 +1,26 @@
 # U-Net model implementation
-As of 27-10-2023, this is placeholder code for my future generated mask data. For now, I use publicly available data: https://www.kaggle.com/datasets/newra008/lung-mask-image-dataset
+This repository contains code used to train a UNet model on histopathological breast cancer images, using CODEX-derived binary mask labels. Training images are shape (512, 512, 3) RGB .tif images and label images are (512, 512, C) multi-channel .tif images where the channel to train on is indexed in `dataset.py`
 
-To replicate project, download the dataset and create a data folder in the root directory. Move train/ test/ and val/ folders to your created data folder.
+In order to replicate this project, structure a data folder like the following:
+
+<pre>
+data/
+├─ marker-specific-dataset_01/
+│  ├─ he/
+│  │  ├─ img_0.tif
+│  │  └─ img_1.tif
+│  └─ masks/
+│     ├─ img_0_mask.tif
+│     └─ img_1_mask.tif
+│  
+└─ marker-specific-dataset_02/
+   ├─ he/
+   │  ├─ img_0.tif
+   │  └─ img_1.tif
+   └─ masks/
+      ├─ img_0_mask.tif
+      └─ img_1_mask.tif
+</pre>
 
 <p align="center">
   <img src="images/architecture_dark.PNG" alt="UNET model" width="35%">
