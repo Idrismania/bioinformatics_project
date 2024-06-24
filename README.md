@@ -27,7 +27,7 @@ data/
       └─ img_1_mask.tif
 </pre>
 
-In order to configure dlup and pyvips, Add Windows binary files to your windows PATH folder and import them through `os.add_dll_directory("FILE_PATH")`. File paths are configured through Hydra-Core in `conf/config.yaml` and `src/config.py`.
+In order to configure dlup and pyvips, Add Windows binary files to your windows PATH folder and import them through `os.add_dll_directory("FILE_PATH")`. File paths and hyperparameters are configured through Hydra-Core in `conf/config.yaml` and `src/config.py`.
 
 * pyvips: https://github.com/libvips/build-win64-mxe/releases/tag/v8.15.0 <br>
 * openslide (for dlup): https://openslide.org/download/
