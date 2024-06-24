@@ -1,3 +1,8 @@
+"""
+Given directories of training images and labels, a training sample index and number of augmentations,
+this script plots a range of augmentations. This is useful for testing during augmentation implementations.
+"""
+
 import os
 import sys
 import tifffile

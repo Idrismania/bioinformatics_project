@@ -1,14 +1,20 @@
+"""
+Given data folder and output path, this script saves many augmented training images and mask labels side-by-side.
+Useful for ensuring the model loads proper images and their appropriate, correctly transformed masks. 
+"""
+
 import numpy as np
 import tifffile 
 import os
 from pathlib import Path
 import matplotlib.pyplot as plt
 from PIL import Image
-
-path = Path(r"E:\Users\Horlings\ii_hh\bioinformatics_project\data")
 import albumentations as A
 import numpy as np
 from albumentations.pytorch import ToTensorV2
+
+path = Path(r"E:\Users\Horlings\ii_hh\bioinformatics_project\data")
+out_path = Path(r"E:\\Users\\Horlings\\ii_hh\\bioinformatics_project\\input_label_pairs")
 
 # Geometric transformations (applied to both image and mask)
 geometric_transforms = A.Compose([
@@ -63,7 +69,7 @@ for i in range(len(os.listdir(r"E:\Users\Horlings\ii_hh\bioinformatics_project\d
 
     fig = np.concatenate((image, mask_rgb), axis=1)
     im = Image.fromarray(fig)
-    im.save(f"E:\\Users\\Horlings\\ii_hh\\bioinformatics_project\\input_label_pairs\\image_{i}.png")
+    im.save(Path(out_path, f"image_{i}.png"))
 
 
     

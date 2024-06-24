@@ -8,7 +8,7 @@ geometric_transforms = A.Compose([
     A.VerticalFlip(p=0.5),
     A.RandomRotate90(p=1),
     A.Rotate(limit=(-45, 45), p=1),
-    #A.ElasticTransform(alpha=80, sigma=9, alpha_affine=20, p=1)
+    #A.ElasticTransform(alpha=80, sigma=9, alpha_affine=20, p=1) # Significantly slows down training, but U-Net authors say this is great for generalization
 ], additional_targets={'mask': 'mask'})
 
 # Color transformations (applied only to the image)
