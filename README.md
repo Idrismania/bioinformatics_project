@@ -2,7 +2,7 @@
 This repository contains code used to train a UNet model on histopathological breast cancer images, using CODEX-derived binary mask labels. Training images are shape (512, 512, 3) RGB .tif images and label images are (512, 512, C) multi-channel .tif images where the channel to train on is indexed in `dataset.py`
 
 <p align="center">
-  <img src="images/architecture_dark.PNG" alt="UNET model" width="35%">
+  <img src="images/architecture_dark.PNG" alt="UNET model" width="75%">
   <br>
 </p>
 
