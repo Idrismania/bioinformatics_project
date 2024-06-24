@@ -115,3 +115,7 @@ class UNet(nn.Module):
         output = self.conv2(output)
 
         return output
+
+
+if __name__ == "__main__":
+    pass

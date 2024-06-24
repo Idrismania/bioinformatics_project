@@ -24,13 +24,16 @@ class UNetDataset(Dataset):
         mask_path = os.path.join(self.mask_dir, img_name.replace(".tif", "_mask.tif"))  # assumes mask file names are similar
         
         image = tifffile.imread(img_path)
-        mask = tifffile.imread(mask_path)[:, :, 0] # THIS INDEX DECIDES WHICH CHANNEL TO LOAD, VERY IMPORTANT
+        mask = tifffile.imread(mask_path)[:, :, :] # THIS INDEX DECIDES WHICH CHANNEL TO LOAD, VERY IMPORTANT
 
-        image = np.array(image, dtype=np.uint8)
-        mask = np.array(mask, dtype=np.uint8)
 
+        mask = mask[:, :, 3] + mask[:, :, 4] + mask[:, :, 5]
+        mask = np.where(mask > 0, 1, 0)
 
         if self.transform:
             image, mask = self.transform(image, mask)
 
         return image, mask
+
+if __name__ == "__main__":
+    pass

@@ -47,7 +47,7 @@ cs.store('UnetConfig', node=UnetConfig)
 @hydra.main(config_path='../conf', config_name='config', version_base='1.3')
 def main(cfg: UnetConfig):
     scaler = torch.cuda.amp.GradScaler()
-    train_dataloader, _, _ = load_dataloaders()
+    train_dataloader, val_dataloader, _ = load_dataloaders()
 
     # Hyperparameters
     learning_rate = cfg.params.learning_rate
@@ -87,7 +87,7 @@ def main(cfg: UnetConfig):
                     outputs = model(images)
 
                     loss = criterion(outputs, labels)
-                    writer.add_scalar("Loss/train", loss, epoch)
+                    
 
                 # Zero the gradients
                 optimizer.zero_grad(set_to_none=True)
@@ -105,11 +105,27 @@ def main(cfg: UnetConfig):
                 # Update tqdm progress bar with the current loss
                 tqdm_dataloader.set_postfix(loss=loss.item())
 
-                del loss
+                # del loss
                 del outputs
             
             # Save the trained model
-        torch.save(model.state_dict(), Path(os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..')), "output_model", f"model.pth"))
+
+        model.eval()  # Set the model to evaluation mode
+        val_loss = 0.0
+        with torch.no_grad():
+            for val_images, val_labels in val_dataloader:
+                val_images, val_labels = val_images.to(device), val_labels.to(device)
+
+                val_outputs = model(val_images)
+
+                val_loss += criterion(val_outputs, val_labels).item()
+
+        val_loss /= len(val_dataloader)
+        running_loss /= len(train_dataloader)
+        writer.add_scalars("Loss", {"Validation loss": val_loss, "Training loss": running_loss}, epoch)
+
+
+        torch.save(model.state_dict(), Path(os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..')), "output_model", "epithelial", f"final_epithelial_epoch_{epoch}.pth"))
         writer.flush()
 
 if __name__ == "__main__":
