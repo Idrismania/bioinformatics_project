@@ -4,7 +4,7 @@ As of 27-10-2023, this is placeholder code for my future generated mask data. Fo
 To replicate project, download the dataset and create a data folder in the root directory. Move train/ test/ and val/ folders to your created data folder.
 
 <p align="center">
-  <img src="images/architecture_HD.png" alt="UNET model" width="35%">
+  <img src="images/architecture_dark.PNG" alt="UNET model" width="35%">
   <br>
 </p>
 
