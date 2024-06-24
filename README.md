@@ -31,3 +31,10 @@ In order to configure dlup and pyvips, Add Windows binary files to your windows 
 
 * pyvips: https://github.com/libvips/build-win64-mxe/releases/tag/v8.15.0 <br>
 * openslide (for dlup): https://openslide.org/download/
+
+Important consideration for performance improvement beyond improving the data processing method includes implementation of weighted BCEwithlogitsloss():
+
+```math
+\ell\left (\mathbf{\hat{Y}, Y}\right )= - \left (\beta \odot \mathbf{Y}\odot\ln\left (\sigma\left ( \mathbf{\hat{Y}} \right )\right )+\left (1-\mathbf{Y}\right )\odot\ln\left (1-\sigma\left ( \mathbf{\hat{Y}} \right )\right )\right )
+```
+Where the beta factor compensates for low occurence of the positive class.
