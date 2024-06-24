@@ -35,6 +35,6 @@ In order to configure dlup and pyvips, Add Windows binary files to your windows 
 Important consideration for performance improvement beyond improving the data processing method includes implementation of weighted `BCEwithlogitsloss()`:
 
 ```math
-\ell\left (\mathbf{\hat{Y}, Y}\right )= - \left (\beta \odot \mathbf{Y}\odot\ln\left (\sigma\left ( \mathbf{\hat{Y}} \right )\right )+\left (1-\mathbf{Y}\right )\odot\ln\left (1-\sigma\left ( \mathbf{\hat{Y}} \right )\right )\right )
+\ell(\mathbf{\hat{Y}, Y})= - (\beta \odot \mathbf{Y}\odot\ln(\sigma( \mathbf{\hat{Y}} ))+(1-\mathbf{Y})\odot\ln\ (1-\sigma\ ( \mathbf{\hat{Y}} ) ) )
 ```
 Where the β factor compensates for low occurence of the positive class.
