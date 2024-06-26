@@ -40,3 +40,5 @@ Important consideration for performance improvement beyond improving the data pr
 \ell(\mathbf{\hat{Y}, Y})= - (\beta \odot \mathbf{Y}\odot\ln(\sigma( \mathbf{\hat{Y}} ))+(1-\mathbf{Y})\odot\ln\ (1-\sigma\ ( \mathbf{\hat{Y}} ) ) )
 ```
 Where the β factor compensates for low occurence of the positive class.
+
+HED jitter in `myTransforms.py` obtained from https://github.com/gatsby2016/Augmentation-PyTorch-Transforms
